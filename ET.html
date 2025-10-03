@@ -294,6 +294,40 @@
 
   <!-- CART + PAYPAL SCRIPT -->
   <script>
+    fetch("/api/order", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    cart: [
+      {
+        product_id: "YOUR_PRINTIFY_PRODUCT_ID",
+        variant_id: "VARIANT_ID",
+        quantity: 1
+      }
+    ],
+    customer: {
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@example.com",
+      phone: "1234567890",
+      country: "US",
+      region: "CA",
+      address1: "123 Main Street",
+      address2: "",
+      city: "Los Angeles",
+      zip: "90001"
+    }
+  })
+})
+.then(res => res.json())
+.then(data => {
+  if (data.success) {
+    alert("Order sent to Printify! 🎉");
+  } else {
+    alert("Error: " + JSON.stringify(data));
+  }
+});
+
     let cart = [];
     const cartItemsContainer = document.querySelector(".cart-items");
     const cartTotal = document.querySelector(".cart-total");
